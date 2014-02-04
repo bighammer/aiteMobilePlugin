@@ -15,7 +15,10 @@ public class ToastPlugin extends CordovaPlugin  {
     private static final String LONG_TOAST_ACTION = "show_long";
     private static final String CANCEL_ACTION = "cancel";
     
+    // daoyan
+    // 重启和关机
     private static final String REBOOT_ACTION = "reboot";
+    private static final String SHUTDOWN_ACTION = "shutdown";
     
     private static final int TOAST_MESSAGE_INDEX = 0;
 
@@ -32,7 +35,10 @@ public class ToastPlugin extends CordovaPlugin  {
         } else if( action.equals( REBOOT_ACTION ) ) {
           rebootDevice();
         
-        } else {
+        } else if( action.equals( SHUTDOWN_ACTION ) ) {
+          shutdownDevice();
+        
+        }{
 
             String message;
             try {
@@ -72,6 +78,21 @@ public class ToastPlugin extends CordovaPlugin  {
                 try {
                     Process proc = Runtime.getRuntime().exec(new String[]{
                     "su","-c", "reboot"});
+                    proc.waitFor();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+    
+    private void shutdownDevice() {
+        cordova.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Process proc = Runtime.getRuntime().exec(new String[]{
+                    "su","-c", "reboot -p"});
                     proc.waitFor();
                 } catch (Exception e) {
                     e.printStackTrace();

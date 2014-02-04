@@ -14,5 +14,9 @@ module.exports = {
     
     reboot: function (win, fail) {
         cordova.exec(win, fail, "Toasty", "reboot", []);
+    },
+    
+    shutdown: function (win, fail) {
+        cordova.exec(win, fail, "Toasty", "shutdown", []);
     }
 };
