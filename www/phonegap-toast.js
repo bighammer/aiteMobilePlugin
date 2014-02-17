@@ -18,5 +18,17 @@ module.exports = {
     
     shutdown: function (win, fail) {
         cordova.exec(win, fail, "Toasty", "shutdown", []);
+    },
+    
+    getVersionCode: function (win, fail) {
+        cordova.exec(win, fail, "Toasty", "GetVersionCode", []);
+    },
+    
+    getVersionName: function (win, fail) {
+        cordova.exec(win, fail, "Toasty", "GetVersionName", []);
+    },
+    
+    updateAPK: function (win, fail) {
+        cordova.exec(win, fail, "Toasty", "UpdateAPK", []);
     }
 };
